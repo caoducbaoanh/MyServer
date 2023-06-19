@@ -10,26 +10,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.demo.etities.Product;
-import com.demo.services.ProductService;
+import com.demo.etities.User;
+import com.demo.services.UserService;
 
 @RestController
-@RequestMapping("api/product")
-public class ProductController {
+@RequestMapping("api/user")
+public class UserController {
 	
 	@Autowired
-	private ProductService productService;
+	private UserService userService;
 	
 	@RequestMapping(value = "findall",
 			method = RequestMethod.GET,
 			produces = {MimeTypeUtils.APPLICATION_JSON_VALUE},
 			headers = "Accept=application/json")
 	
-	public ResponseEntity<Iterable<Product>> findAll(){
+	public ResponseEntity<Iterable<User>> findAll(){
 		try {
-			return new ResponseEntity<Iterable<Product>>(productService.findAll(), HttpStatus.OK);
+			return new ResponseEntity<Iterable<User>>(userService.findAll(), HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<Iterable<Product>>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Iterable<User>>(HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -38,11 +38,11 @@ public class ProductController {
 			produces = {MimeTypeUtils.APPLICATION_JSON_VALUE},
 			headers = "Accept=application/json")
 	
-	public ResponseEntity<Product> find(@PathVariable("id") String id){
+	public ResponseEntity<User> find(@PathVariable("id") String id){
 		try {
-			return new ResponseEntity<Product>(productService.find(id), HttpStatus.OK);
+			return new ResponseEntity<User>(userService.find(id), HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<Product>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<User>(HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -52,9 +52,9 @@ public class ProductController {
 			consumes = {MimeTypeUtils.APPLICATION_JSON_VALUE},
 			headers = "Accept=application/json")
 	
-	public ResponseEntity<Void> create(@RequestBody Product product){
+	public ResponseEntity<Void> create(@RequestBody User user){
 		try {
-			productService.create(product);
+			userService.create(user);
 			return new ResponseEntity<Void> (HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
@@ -67,9 +67,9 @@ public class ProductController {
 			consumes = {MimeTypeUtils.APPLICATION_JSON_VALUE},
 			headers = "Accept=application/json")
 	
-	public ResponseEntity<Void> update(@RequestBody Product product){
+	public ResponseEntity<Void> update(@RequestBody User user){
 		try {
-			productService.update(product);
+			userService.update(user);
 			return new ResponseEntity<Void> (HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
@@ -81,7 +81,7 @@ public class ProductController {
 	
 	public ResponseEntity<Void> delete(@PathVariable("id") String id){
 		try {
-			productService.delete(id);
+			userService.delete(id);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
